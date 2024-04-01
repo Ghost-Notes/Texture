@@ -72,8 +72,9 @@ static NSString * const kRate = @"rate";
   AVAudioMix *_audioMix;
   
   AVPlayerItem *_currentPlayerItem;
-  AVPlayer *_player;
-  
+  AVQueuePlayer *_player;
+  AVPlayerLooper *_playerLooper;
+
   id _timeObserver;
   int32_t _periodicTimeObserverTimescale;
   CMTime _timeObserverInterval;
@@ -165,9 +166,16 @@ static NSString * const kRate = @"rate";
   [self setCurrentItem:playerItem];
   
   if (_player != nil) {
-    [_player replaceCurrentItemWithPlayerItem:playerItem];
+    [_player removeAllItems];
+    [_player insertItem:playerItem afterItem:nil];
   } else {
-    self.player = [AVPlayer playerWithPlayerItem:playerItem];
+    self.player = [AVQueuePlayer playerWithPlayerItem:playerItem];
+  }
+
+  if (_shouldAutorepeat) {
+    _playerLooper = [AVPlayerLooper playerLooperWithPlayer:_player templateItem:playerItem];
+  } else {
+    _playerLooper = nil;
   }
 
   if (_delegateFlags.delegateVideoNodeDidSetCurrentItem) {
@@ -749,8 +757,9 @@ static NSString * const kRate = @"rate";
   }
 
   if (_shouldAutorepeat) {
-    [_player seekToTime:kCMTimeZero];
-    [self play];
+    // handled by playerlooper now
+    //[_player seekToTime:kCMTimeZero];
+    //[self play];
   } else {
     [self pause];
   }

@@ -12,7 +12,7 @@
 
 #if AS_USE_VIDEO
 
-@class AVAsset, AVPlayer, AVPlayerLayer, AVPlayerItem, AVVideoComposition, AVAudioMix;
+@class AVAsset, AVPlayer, AVPlayerLayer, AVPlayerItem, AVVideoComposition, AVAudioMix, AVQueuePlayer, AVPlayerLooper;
 @protocol ASVideoNodeDelegate;
 
 typedef NS_ENUM(NSInteger, ASVideoNodePlayerState) {
@@ -55,7 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable) AVVideoComposition *videoComposition;
 @property (nullable) AVAudioMix *audioMix;
 
-@property (nullable, readonly) AVPlayer *player;
+@property (nullable, readonly) AVQueuePlayer *player;
+@property (nullable, readonly) AVPlayerLooper *playerLooper;
 
 // TODO: copy
 @property (nullable, readonly) AVPlayerItem *currentItem;

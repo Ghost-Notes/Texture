@@ -158,8 +158,8 @@ static NSString * const kRate = @"rate";
   }
   
   if ([asset isPlayable] == NO) {
-    NSLog(@"Asset is not playable.");
-    return;
+    NSLog(@"Asset is not playable, but we are ignoring that for now!");
+    //return;
   }
 
   AVPlayerItem *playerItem = [self constructPlayerItem];

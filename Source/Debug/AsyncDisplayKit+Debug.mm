@@ -297,7 +297,11 @@ static BOOL __shouldShowRangeDebugOverlay = NO;
 + (UIWindow *)keyWindow
 {
   // hack to work around app extensions not having UIApplication...not sure of a better way to do this?
+#if !TARGET_OS_VISION
   return [[NSClassFromString(@"UIApplication") sharedApplication] keyWindow];
+#else
+  return nil;
+#endif
 }
 
 + (_ASRangeDebugOverlayView *)sharedInstance NS_RETURNS_RETAINED
@@ -736,7 +740,11 @@ static BOOL __shouldShowRangeDebugOverlay = NO;
                                                                     borderColor:[[UIColor blackColor] colorWithAlphaComponent:0.9]
                                                                     borderWidth:RANGE_BAR_BORDER_WIDTH
                                                                  roundedCorners:UIRectCornerAllCorners
+#if !TARGET_OS_VISION
                                                                           scale:[[UIScreen mainScreen] scale]
+#else
+                               scale:1.0
+#endif
                                                                 traitCollection:primitiveTraitCollection];
     [self addSubnode:rangeBarImageNode];
   

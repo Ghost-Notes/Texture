@@ -2137,7 +2137,9 @@ dispatch_semaphore_signal(_lock);
       } else {
         topRect.rect = CGRectMake(_container.path ? startLine.left : _container.insets.left, startLine.top, topOffset - startLine.left, startLine.height);
       }
+#if !TARGET_OS_VISION
       topRect.writingDirection = UITextWritingDirectionRightToLeft;
+#endif
     } else {
       if (isVertical) {
         topRect.rect = CGRectMake(startLine.left, topOffset, startLine.width, (_container.path ? startLine.bottom : _container.size.height - _container.insets.bottom) - topOffset);
@@ -2160,7 +2162,9 @@ dispatch_semaphore_signal(_lock);
       } else {
         bottomRect.rect = CGRectMake(bottomOffset, endLine.top, (_container.path ? endLine.right : _container.size.width - _container.insets.right) - bottomOffset, endLine.height);
       }
+#if !TARGET_OS_VISION
       bottomRect.writingDirection = UITextWritingDirectionRightToLeft;
+#endif
     } else {
       if (isVertical) {
         CGFloat top = _container.path ? endLine.top : _container.insets.top;

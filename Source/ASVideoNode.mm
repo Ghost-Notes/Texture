@@ -296,10 +296,12 @@ static NSString * const kRate = @"rate";
 
 - (void)imageAtTime:(CMTime)imageTime completionHandler:(void(^)(UIImage *image))completionHandler
 {
+#if !TARGET_OS_VISION
   ASPerformBlockOnBackgroundThread(^{
     AVAsset *asset = self->_asset;
 
     // Skip the asset image generation if we don't have any tracks available that are capable of supporting it
+
     NSArray<AVAssetTrack *>* visualAssetArray = [asset tracksWithMediaCharacteristic:AVMediaCharacteristicVisual];
     if (visualAssetArray.count == 0) {
       completionHandler(nil);
@@ -318,6 +320,9 @@ static NSString * const kRate = @"rate";
                                                   completionHandler(image ? [UIImage imageWithCGImage:image] : nil);
                                                 }];
   });
+#else
+  completionHandler(nil);
+#endif
 }
 
 - (void)setVideoPlaceholderImage:(UIImage *)image

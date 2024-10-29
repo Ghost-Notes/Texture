@@ -220,10 +220,12 @@
 	// In every use case I can imagine, the pager is not hosted inside a range-managed node.
 	if (_allowsAutomaticInsetsAdjustment == NO) {
 		UIViewController *vc = [self.view asdk_associatedViewController];
-		if (vc.automaticallyAdjustsScrollViewInsets) {
+#if !TARGET_OS_VISION
+    if (vc.automaticallyAdjustsScrollViewInsets) {
 			NSLog(@"AsyncDisplayKit: ASPagerNode is setting automaticallyAdjustsScrollViewInsets=NO on its owning view controller %@. This automatic behavior will be disabled in the future. Set allowsAutomaticInsetsAdjustment=YES on the pager node to suppress this behavior.", vc);
 			vc.automaticallyAdjustsScrollViewInsets = NO;
 		}
+#endif
 	}
 }
 

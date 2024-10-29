@@ -173,7 +173,11 @@
 
 - (void)_updateNodeFallbackSafeArea
 {
+#if !TARGET_OS_VISION
   UIEdgeInsets safeArea = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, self.bottomLayoutGuide.length, 0);
+#else
+  UIEdgeInsets safeArea = UIEdgeInsetsMake(0, 0, 0, 0);
+#endif
   UIEdgeInsets additionalInsets = self.additionalSafeAreaInsets;
 
   safeArea = ASConcatInsets(safeArea, additionalInsets);

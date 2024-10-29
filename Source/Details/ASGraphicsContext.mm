@@ -35,7 +35,9 @@ NS_INLINE void ASConfigureExtendedRange(UIGraphicsImageRendererFormat *format)
     // nop. We always use automatic range on iOS >= 12.
   } else {
     // Currently we never do wide color. One day we could pipe this information through from the ASImageNode if it was worth it.
+#if !TARGET_OS_VISION
     format.prefersExtendedRange = NO;
+#endif
   }
 }
 

@@ -438,7 +438,7 @@ dispatch_semaphore_signal(_lock);
   
   // It may use larger constraint size when create CTFrame with
   // CTFramesetterCreateFrame in iOS 10.
-  BOOL needFixLayoutSizeBug = AS_AT_LEAST_IOS10;
+  BOOL needFixLayoutSizeBug = YES;
 
   layout = [[ASTextLayout alloc] _init];
   layout.text = text;
@@ -2138,7 +2138,7 @@ dispatch_semaphore_signal(_lock);
         topRect.rect = CGRectMake(_container.path ? startLine.left : _container.insets.left, startLine.top, topOffset - startLine.left, startLine.height);
       }
 #if !TARGET_OS_VISION
-      topRect.writingDirection = UITextWritingDirectionRightToLeft;
+      topRect.writingDirection = NSWritingDirectionRightToLeft;
 #endif
     } else {
       if (isVertical) {
@@ -2163,7 +2163,7 @@ dispatch_semaphore_signal(_lock);
         bottomRect.rect = CGRectMake(bottomOffset, endLine.top, (_container.path ? endLine.right : _container.size.width - _container.insets.right) - bottomOffset, endLine.height);
       }
 #if !TARGET_OS_VISION
-      bottomRect.writingDirection = UITextWritingDirectionRightToLeft;
+      bottomRect.writingDirection = NSWritingDirectionRightToLeft;
 #endif
     } else {
       if (isVertical) {

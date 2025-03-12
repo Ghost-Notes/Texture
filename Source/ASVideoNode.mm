@@ -456,7 +456,7 @@ static NSString * const kRate = @"rate";
   {
     ASLockScopeSelf();
 
-    self.player = nil;
+    // self.player = nil; // DO NOT CLEAR THIS, we are managing them to persist
     self.currentItem = nil;
     self.playerState = ASVideoNodePlayerStateUnknown;
   }
@@ -832,7 +832,7 @@ static NSString * const kRate = @"rate";
   [self setNeedsLayout];
 }
 
-- (void)setPlayer:(AVPlayer *)player
+- (void)setPlayer:(AVQueuePlayer *)player
 {
   ASLockScopeSelf();
 

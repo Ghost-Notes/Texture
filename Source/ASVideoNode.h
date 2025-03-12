@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable) AVVideoComposition *videoComposition;
 @property (nullable) AVAudioMix *audioMix;
 
-@property (nullable, readonly) AVQueuePlayer *player;
+@property (nullable) AVQueuePlayer *player;
 @property (nullable, readonly) AVPlayerLooper *playerLooper;
 
 // TODO: copy
